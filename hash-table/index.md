@@ -202,7 +202,7 @@ However, if a bucket does exist, we'll check to see if there's a matching key in
 ```js
 remove(key) {
     let index = this._hash(key);
-    if (this.storage[index].length === 1 && this.storage[index][0][0]) {
+    if (this.storage[index].length === 1 && this.storage[index][0][0] === key) {
         this.storage.splice(index, 1);
     } else {
         for (let i = 0; i < this.storage[index].length; i++) {
@@ -217,7 +217,9 @@ remove(key) {
 
 Again, we have a very self-explainatory method here; this method allows us to remove or essentially delete a piece of data from our Hash Table using just the key name.
 
-So, naturally, this method accepts the key name as an argument and uses that key to find the index position in our storage array by invoking our hash function
+So, naturally, this method accepts the key name as an argument and uses that key to find the index position in our storage array by invoking our hash function. Once we've achieved that step we'll first check the bucket within our storage array to see if there's only one item in that bucket. If there's only one item, we'll remove the item along with the entire bucket.
+
+However, if there are multiple items, we'll need to iterate the bucket at the current index until we find a match and then remove the matched key from the buckey while leaving the others intact.
 
 <br>
 <br>
