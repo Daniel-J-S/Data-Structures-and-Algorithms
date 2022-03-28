@@ -96,4 +96,7 @@ class HashTable {
 
 const myNewHashTable = new HashTable(); // Passing in the length is optional
 ```
+<br>
+<br>
 
+For the remaining part of this walkthrough, we'll go through the individual methods to explain what they each do.
