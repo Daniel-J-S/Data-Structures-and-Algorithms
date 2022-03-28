@@ -146,7 +146,21 @@ In addition to console logging the hash result, which again, is simply a sum of 
 <br>
 <br>
 
-## Print
+## `print`
+
+```js
+print() {
+    let items = this.storage.flat();
+    let result = items.reduce((hashTable, [key, value]) => {
+        hashTable[key] = value
+        return hashTable;
+    }, {});
+    console.log(result);
+    return result;
+}
+```
+
+I had a lot of fun putting this method together; basically, this function produces a human readable view object using a JavaScript Object Literal. Basically, it flattens the storage array removing the empty slots and then maps over the result adding the corresponding `key: value` pairs to a locally intialized JavaScript Object literal. We'll finish the task by console logging and returning the result.
 
 <br>
 <br>
