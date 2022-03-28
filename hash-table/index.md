@@ -227,12 +227,37 @@ However, if there are multiple items, we'll need to iterate the bucket at the cu
 
 ## Lookup
 
+```js
+lookup(key) {
+    let index = this._hash(key);
+    if (this.storage[index] === undefined) {
+        return undefined;
+    } else {
+        for (let i = 0; i < this.storage[index].length; i++) {
+            if (this.storage[index][i][0] === key) {
+                return this.storage[index][i];
+            }
+        }
+    }
+}
+```
+
+This method performs a look up of a piece of data using a key. First we find the index of the item by invoking our hash function once again, which will return our index.
+
+Next, once we have our index, we'll check to see if that index exists within the Hash Table. If it doesn't exist, in other words, if it's `undefined`, we'll return the value of `undefined`.
+
+Otherwise, if it does exist, we'll search the bucket located at the corresponding index and return the item who's key we've matched.
+
 <br>
 <br>
 
 ## Conclusion
 
+That concludes my walkthough of my explaination/implementation of a Hash Table using a JavaScript Class. Keep in mind that this example is likely unpractical in a real-world scenario as we'd likely just use a JavaScript object. Also, when it comes to writing a hash function, there are likely better ways to do it versus how I've done it in this example. Besides the hash function being super important in regard to performance, there are other considerations we'd need to factor in such as choosing the proper length for our hash table and so forth. 
+
+That said, I hope you've enjoyed this walkthrough and have found it valueable for your own understanding of them.
 
 ## Resources
 
 - [Stack Overflow Article: How to choose the size of a Hash Table](https://stackoverflow.com/questions/22741966/how-to-choose-size-of-hash-table)
+- [Beau Carnes Walkthrough of a Hash Table](https://www.youtube.com/watch?v=F95z5Wxd9ks) - *I took a ton of inspiration from this video*
