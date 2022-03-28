@@ -44,7 +44,7 @@ class HashTable {
 
     remove(key) {
         let index = this._hash(key);
-        if (this.storage[index].length === 1 && this.storage[index][0][0]) {
+        if (this.storage[index].length === 1 && this.storage[index][0][0] === key) {
             this.storage.splice(index, 1)
         } else {
             for (let i = 0; i < this.storage[index].length; i++) {
