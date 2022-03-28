@@ -165,12 +165,59 @@ I had a lot of fun putting this method together; basically, this function produc
 <br>
 <br>
 
-## Add
+## `add`
+
+```js
+add(key, value) {
+    let index = this._hash(key);
+    if (this.storage[index] === undefined) {
+        this.storage[index] = [[key, value]];
+    } else {
+        let inserted = false;
+        for (let i = 0; i < this.storage[index].length; i++) {
+            if (this.storage[index][i][0] === key) {
+                this.storage[index][i][1] = value;
+                inserted = true;
+            }
+        }
+        if (inserted === false) {
+            this.storage[index].push([key, value]);
+        }
+    }
+    this.print();
+}
+```
+
+This method does exactly what it says it does; it allows us to add a piece of data to our Hash Table.
+
+First, we start by finding an index to put our new piece of data; we do this by generating a hash using our hash function. Then our next step is to see if anything currently exists at that location within our storage array. If it doesn't exist, we'll insert it there inside of another list we'll use as bucket in the case of a collision.
+
+However, if a bucket does exist, we'll check to see if there's a matching key in that bucket by search each item in the bucket; this would be an O(n) lookup by the way. If we find a matching key, we'll update it's value with the new value provided. However, if we don't have a matching key, we'll simply push our new `key: value` pair into that bucket instead.
 
 <br>
 <br>
 
-## Remove
+## `remove`
+
+```js
+remove(key) {
+    let index = this._hash(key);
+    if (this.storage[index].length === 1 && this.storage[index][0][0]) {
+        this.storage.splice(index, 1);
+    } else {
+        for (let i = 0; i < this.storage[index].length; i++) {
+            if (this.storage[index][i][0] === key) {
+                this.storage[index].splice(i, 1);
+            }
+        }
+    }
+    this.print();
+}
+```
+
+Again, we have a very self-explainatory method here; this method allows us to remove or essentially delete a piece of data from our Hash Table using just the key name.
+
+So, naturally, this method accepts the key name as an argument and uses that key to find the index position in our storage array by invoking our hash function
 
 <br>
 <br>
