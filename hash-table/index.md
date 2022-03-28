@@ -14,6 +14,10 @@ The way Hash tables find data is by associating a key with an index, which provi
 
 Sometimes, two or more keys can get mapped to the same index; this is called a collision. In order to address this, one thing we could possibly do is add the data at that index to a list; in many cases a linked list is used. This can sometimes increase the lookup time since we'd have to iterate over the list to find the appropriate piece of data.
 
+In summary, the performance of a Hash Table in regards to most aspects such as being able to perform various services on it's data is highly dependent upon the hash function.
+
+Also, the size of the Hash Table can also have an effect on the performance as well.
+
 
 <br>
 <br>
@@ -98,5 +102,74 @@ const myNewHashTable = new HashTable(); // Passing in the length is optional
 ```
 <br>
 <br>
+As we can see, this `Hash Table` is implemented using a JavaScript class. One thing to keep in mind and of course remind ourselves is that it's very unlikely we'd ever need to implement something like this in an actual JavaScript program as we'd likely just use a JavaScript Object literal instead. However, for learning purposes, we'll use this example to get a feel for how Hash Tables work.
+
 
 For the remaining part of this walkthrough, we'll go through the individual methods to explain what they each do.
+
+<br>
+<br>
+
+## `constructor`
+
+```js
+constructor(size = 10) {
+    this.storageLimit = size;
+    this.storage = new Array(size);
+}
+```
+<br>
+
+This method get's called automatically upon instantiation of the class [(see ES6 JavaScript `class` syntax)](#); in this particular case, we have the option to pass in the max length we want for our hash table. The default in this case is 10. We'll use that value to set our storage and storageLength fields.
+
+<br>
+<br>
+
+## `_hash`
+
+```js
+_hash(string) {
+    let hash = 0;
+    for (let i = 0; i < string.length; i++) {
+        hash += string.charCodeAt(i);
+    }
+    console.log(hash);
+    return hash % this.storageLimit;
+}
+```
+<br>
+
+This is a very simple hash function implementation that creates a sum of all the character codes from each character contained within a provided `key` used to map to a piece of data in our hash table; the assumption here is that we're using the string datatype for our keys.
+
+In addition to console logging the hash result, which again, is simply a sum of each char code contained with the `key` string, we're also returning the result of computing `hash` modulus the storage limit. This is how we calculate the index position of the bucket we'll store our key value pair within the Hash Table.
+
+<br>
+<br>
+
+## Print
+
+<br>
+<br>
+
+## Add
+
+<br>
+<br>
+
+## Remove
+
+<br>
+<br>
+
+
+## Lookup
+
+<br>
+<br>
+
+## Conclusion
+
+
+## Resources
+
+- [Stack Overflow Article: How to choose the size of a Hash Table](https://stackoverflow.com/questions/22741966/how-to-choose-size-of-hash-table)
