@@ -1,7 +1,7 @@
 class HashTable {
     constructor(size = 10) {
+        this.storageLimit = size;
         this.storage = new Array(size);
-        this.storageLimit = 10;
     }
 
     _hash(string) {
