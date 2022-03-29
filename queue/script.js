@@ -68,23 +68,18 @@ class QueueB {
 
     add(data) {
         const node = new Node(data);
-
         this.collection.push(node);
-
         if (this.tail !== null) {
             this.tail.next = node;
         }
-
         this.tail = node;
-
         if (this.head === null) {
             this.head = node;
         }
-
     }
 
     remove() {
-        this.collection.shift()
+        this.collection.shift();
         const data = this.head.data;
         this.head = this.head.next;
         if (this.head === null) {
@@ -92,6 +87,17 @@ class QueueB {
         }
         return data;
     }
+
+    size() {
+        let count = 0;
+        let node = this.head;
+        while (node) {
+            count++
+            node = node.next;
+        }
+        return count;
+    }
+
 }
 
 const myQueue = new QueueB()
@@ -99,6 +105,7 @@ const myQueue = new QueueB()
 myQueue.add('world')
 myQueue.add('hello')
 console.log(myQueue.isEmpty())
-myQueue.remove()
+// myQueue.remove()
 console.log(myQueue.peek())
 myQueue.viewCollection()
+console.log(myQueue.size())
