@@ -60,21 +60,27 @@ Here's another example of a Queue, but instead of using an Array, as the first e
 class Node {
     constructor(data) {
         this.data = data;
+        this.next = null;
     }
 }
 
 class Queue {
-
-    head = null;
-    tail = null;
-    collection = []; // just for learning purposes
+    constructor(head=null, tail=null) {
+        this.head = head;
+        this.tail = tail;
+        this.collection = []; 
+    }
 
     print() {
+        let node = this.head;
+        while (node) {
+            this.collection.push(node)
+            node = node.next;
+        }
         console.log(this.collection);
     }
 
     enqueue(data) {
-        const node = new Node(data);
         this.collection.push(node);
         if (this.tail !== null) {
             this.tail.next = node;
@@ -86,7 +92,6 @@ class Queue {
     }
 
     dequeue() {
-        this.collection.shift();
         const data = this.head.data;
         this.head = this.head.next;
         if (this.head === null) {
@@ -149,12 +154,17 @@ Unless we have a reference to that node, we'd need to traverse the List until we
 
 ```js
 print() {
+    let node = this.head;
+    while (node) {
+        this.collection.push(node)
+        node = node.next;
+    }
     console.log(this.collection);
 }
 ```
 <br>
 
-There should be no surprise about what this method does. It is often necessary to print the contents of our list to see its inner values, which is precisely what this method does. However, I can't say this is a standardized way of doing this; when writing this Queue, I decided to programmatically store each new node in this array to make it easier to see the entire list from a bird's eye view.
+There should be no surprise about what this method does. It is often necessary to print the contents of our list to see its inner values, which is precisely what this method does. However, I can't say this is a standardized way of doing this; when writing this Queue, I decided to add this `print` method that, once invoked, iterates over the entire list and pushes each `node` into an array and then prints the array to the console.
 
 <br>
 <br>
@@ -164,7 +174,6 @@ There should be no surprise about what this method does. It is often necessary t
 ```js
 enqueue(data) {
     const node = new Node(data);
-    this.collection.push(node);
     if (this.tail !== null) {
         this.tail.next = node;
     }
@@ -177,7 +186,7 @@ enqueue(data) {
 
 <br>
 
-As a reminder, we're using a Linked List to create our Queue, so there's a `Node` class we defined earlier that we're using to instantiate for our enqueued data. Once invoked, `enqueue` takes the data needed to be stored and then creates a new node. We'll push this new `node` into our reference collection array for convenience. Next, we'll set our tail node's `.next` property to our new `node`, as long as it's not empty. Then, we'll point our reference to the tail `node` itself to the new `node`.
+As a reminder, we're using a Linked List to create our Queue, so there's a `Node` class we defined earlier that we're using to instantiate for our enqueued data. Once invoked, `enqueue` takes the data needed to be stored and then creates a new node. Next, we'll set our tail node's `.next` property to our new `node`, as long as it's not empty. Then, we'll point our reference to the tail `node` itself to the new `node`.
 
 Lastly, if our reference to the `head` node is empty, we'll also point it to the `node`.
 
@@ -186,12 +195,42 @@ I know some of this might seem out of context or perhaps a little confusing beca
 <br>
 <br>
 
-## `dequeue` 
+## `dequeue`
+
+```js
+dequeue() {
+    const data = this.head.data;
+    this.head = this.head.next;
+    if (this.head === null) {
+        this.tail = null;
+    }
+    return data;
+}
+```
+
+<br>
+
+This method removes from the front of the Queue as I've described earlier. 
+
+So, first, we'll create a reference to the data within the node we're removing so we can return it later. Then we perform the removal of the `node` by pointing our reference to `head` to the `.next` property of the `head` node we're removing. We'll finish this part up by checking if our updated `head` reference is `null`, and if it is, we'll set the tail to `null` as well; by the way, this means the list is empty.
+
 
 <br>
 <br>
 
 ## `front or peek` 
+
+```js
+front() {
+    if (this.isEmpty()) return null;
+    return this.head.data;
+}
+```
+<br>
+
+This method is also called `peek` in some instances, but it provides us with the convenience of checking the data in the front of our Queue. Of course, if the Queue is empty, we'll return `null` instead.
+
+
 
 <br>
 <br>
