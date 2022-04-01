@@ -13,6 +13,38 @@ In JavaScript, the Array Object has a close resemblance to a Stack, so it's unli
 
 Here's an example of a very simple Stack data structure using a JavaScipt class.
 
+```js
+class Stack {
+    constructor() {
+        this.count = 0;
+        this.storage = {};
+    }
+
+    push(data) {
+        this.storage[this.count] = data;
+        this.count++;
+    }
+
+    pop() {
+        if (this.count === 0) {
+            return undefined;
+        }
+        this.count--
+        let data = this.storage[this.count];
+        delete this.storage[this.count];
+        return data;
+    }
+
+    size() {
+        return this.count;
+    }
+
+    peek() {
+        return this.storage[this.count - 1];
+    }
+}
+```
+
 
 
 
