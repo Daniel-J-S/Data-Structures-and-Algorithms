@@ -15,6 +15,14 @@ When creating a Queue from scratch, there are a few methods along with their des
 - `size` - Returns the length or size of the Queue
 - `isEmpty` - Returns `true` if the Queue list is empty
 
+<br>
+
+## Why use a Queue?
+
+The answer to the question is simple, _The order of our Data is guaranteed_. Also, since there are only two ways to mutate a Queue (`enqueue` or `dequeue`), the integrity of our data will be better maintained as there are fewer ways to destroy it.
+
+<br>
+
 
 Here's a very simple example of a Queue:
 
@@ -228,26 +236,62 @@ front() {
 ```
 <br>
 
-This method is also called `peek` in some instances, but it provides us with the convenience of checking the data in the front of our Queue. Of course, if the Queue is empty, we'll return `null` instead.
-
-
+In some instances, we call this method `peek`; it provides us with the convenience of checking the data in the front of our Queue. Of course, if the Queue is empty, we'll return `null` instead.
 
 <br>
 <br>
 
-## `size` 
+## `size`
+
+```js
+size() {
+    let count = 0;
+    let node = this.head;
+    while (node) {
+        count++
+        node = node.next;
+    }
+    return count;
+}
+```
+<br>
+
+This method measures the size of our Queue list by iterating the entire list and incrementing a counter for each `node`. 
+
+It works by creating a reference, starting at the `head` of our Queue and then working our way to the `tail` by pointing our reference to the `.next` property of our current reference until the `.next` property is `null`.
+
+Finally, we return our count.
+
 
 <br>
 <br>
 
 ## `isEmpty` 
 
+```js
+isEmpty() {
+    return this.head === null;
+}
+```
+<br>
+
+Do you need to check for an empty Queue? Look no further; the `isEmpty()` method does it all! All we need to do is check whether or not our pointer to the head `node` is `null` or not, and if it is, we return `true`; granted, we're accomplishing this by returning one expression.  
+
 <br>
 <br>
 
 ## Conclusion
 
+This concludes my walkthrough of the `Queue` data structure as we took a look at the what, the why, and the how-to implement them using JavaScript and Linked Lists. We also reviewed why a Linked List is a considerable solution for implementing a `Queue` and some of the most common methods we can use for a `Queue`. 
+
+I plan to write content on Linked Lists and Stacks in the future. By the way, Stacks are very similar to `Queues`, as we'll find out later.
+
+Cheers!
+
 <br>
 <br>
 
 ## References
+
+1. <a href="https://medium.com/swlh/the-top-3-reasons-to-use-a-queue-data-structure-7dfd3296d9e4" target="_blank" rel="noopener noreferrer">Top Three Reasons to Use a Queue</a>
+2. <a href="https://www.youtube.com/watch?v=wjI1WNcIntg" target="_blank" rel="noopener noreferrer">Gayle Laakmann Explains Stacks and Queues</a>
