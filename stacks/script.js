@@ -44,12 +44,12 @@ console.log(newStack);
 
 class Node {
     constructor(data) {
-        this.data = data
-        this.next = null
+        this.data = data;
+        this.next = null;
     }
 }
 
-class Stack2 {
+class Stack {
     constructor(top = null) {
         this.top = top;
     }
@@ -72,7 +72,30 @@ class Stack2 {
         return this.top.data;
     }
 
+    size() {
+        let count = 0;
+        let node = this.top;
+        while (node) {
+            count++;
+            node = node.next;
+        }
+        return count;
+    }
+
     isEmpty() {
         return this.top === null;
     }
 }
+
+// const myNewStack = new Stack2()
+
+// console.log(myNewStack)
+// myNewStack.push(42)
+// console.log(myNewStack)
+// myNewStack.push(13)
+// console.log(myNewStack)
+// myNewStack.push(18)
+// myNewStack.pop()
+// myNewStack.pop()
+// console.log(myNewStack)
+// console.log(myNewStack.size())
