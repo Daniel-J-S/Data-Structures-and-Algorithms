@@ -143,6 +143,8 @@ push(data) {
 
 <br>
 
+This method is pretty straightforward; its job is to take whatever data we pass to it and use it to create a new `Node` for our Linked List; next, we'll set our new Node's `.next` pointer to whatever our list's current `Top` is. Then, we'll change our `Top` reference pointer to point to the new Node. You'll notice that I'm also incrementing an internal `size` property; we're using to property to, you guessed it, keep track of the size of the Stack.
+
 
 <br>
 <br>
@@ -161,6 +163,7 @@ pop() {
 
 <br>
 
+Here's another exciting method. This method begins by performing a null pointer check. It is not immediately apparent how we can perform a null pointer check, but if you're curious, it's because of the `isEmpty()` method being called in the `if` statement within the first line; We will discuss that method in more detail soon. Next, we'll save a reference to the `Top` `Node`'s data and then point the `Top` reference to the current `Node` occupying the `Top` position's `.next` property. Finally, we'll decrement the value we're using to internally track the depth of our Stack and then return our data.
 
 <br>
 <br>
@@ -174,6 +177,7 @@ size() {
 ```
 <br>
 
+This method is one of the more straightforward ones. This method returns the depth of our Stack; it's referring to the same value we've been incrementing and decrementing each time we call our push or pop methods respectfully. 
 
 <br>
 <br>
@@ -186,9 +190,9 @@ peek() {
     return this.top.data;
 }
 ```
-
-
 <br>
+
+The `.peek()` method is ubiquitous with Stacks; this method first performs a `null` pointer check by calling the `.isEmpty()` method _(we'll get to that method next)_, and returns the value of `undefined` if the Stack is empty. Otherwise, we return the data from the `Node` at the top of our Stack.
 
 
 <br>
@@ -204,14 +208,17 @@ isEmpty() {
 ```
 <br>
 
-
+I know I've held off long enough from explaining what this method does, but surprisingly, it's very straightforward. This method performs what is known as a `null` pointer check. This phrase is not common in the JavaScript community or as long as I've been a developer. Still, it's a soft nod to what C, C++, and even Java developers have to do, but it's simply a step we need to perform to ensure our `top` reference isn't null or, in other words, a way for us to make sure our Stack isn't empty. This check is an important step we need to complete before performing certain operations as a measure to prevent errors.
 <br>
 <br>
 
 
 ## Conclusion
 
+That concludes my walkthrough of the Stack data structure as we took some time to discuss what Stacks are, why, and how we use them. I also went over a few examples using a JavaScript class; we started with a straightforward implementation using an Object literal before graduating to a Linked List implementation, which is slightly more complex but more flexible and practical. In the meantime, feel free to check out my other <a href="/articles">articles</a> or leave me a comment below to let me know what you think.
 
 ## References
 
 1. <a href="https://www.youtube.com/watch?v=wjI1WNcIntg" target="_blank" rel="noopener noreferrer">Gayle Laakmann Explains Stacks and Queues</a>
+1. <a href="https://www.youtube.com/watch?v=Gj5qBheGOEo" target="_blank" rel="noopener noreferrer">Beau from FreeCodeCamp teaches us the Stack Data Structure</a>
+1. <a href="https://www.freecodecamp.org/news/implementing-a-linked-list-in-javascript/" target="_blank" rel="noopener noreferrer">FreeCodeCamp Blog: How to implement a Linked List in JavaScript</a>
